@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
+    <title>MOwNiT SE</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="container-fluid text-center">
+        <div class="row">
+          <div
+            class="
+              d-none d-md-block
+              col-lg-2 col-md-3
+              small-logo
+              align-self-center
+            "
+          >
+            <a href="/">
+              <span class="text-primary">MOwNiT</span>
+              <span class="text-danger">SE</span></a
+            >
+          </div>
+          <div class="col-lg-8 col-md-6">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="search-input"
+                id="search-input"
+                placeholder="Enter some phrase"
+                value="{{ text }}"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-primary" onclick="search()">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="d-none d-md-block col-lg-2 col-md-3">
+            <div class="dropdown">
+              <button
+                class="btn btn-light dropdown-toggle"
+                type="button"
+                id="search-method"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Search method
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="search-method">
+                <li>
+                  <button class="dropdown-item" onclick="setMethod('vsr')">
+                    <span id="vsr-dot">&bull; </span>VSR
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" onclick="setMethod('vsr-idf')">
+                    <span id="vsr-idf-dot">&bull; </span>VSR + IDF
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" onclick="setMethod('lsi')">
+                    <span id="lsi-dot">&bull; </span>LSI
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" onclick="setMethod('edlsi')">
+                    <span id="edlsi-dot">&bull; </span>EDLSI
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container p-4">
+      {% for item in results %}
+      <div class="row result">
+        <a class="result-title" href="{{ item[0] }}">{{ item[1] }}</a>
+        <a href="{{ item[0] }}">{{ item[0] }}</a>
+        <p class="result-cosine">Cosine: {{ item[2] }}</p>
+      </div>
+      {% endfor %}
+    </main>
+    <footer class="container-fluid text-center">2021 Maksymilian Wojnar</footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
