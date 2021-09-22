@@ -1,0 +1,1 @@
+Energia punktu to y % 10.
